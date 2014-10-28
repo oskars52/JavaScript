@@ -1,0 +1,75 @@
+body, html {
+
+}
+body {
+	background-color: #f1f1f1;
+	width: 100%;
+	font-family: 'Ubuntu', sans-serif;
+}
+.hide {
+	text-indent: -9999px;
+	height: 0px;
+}
+
+h1 {
+    padding: 50px;
+    font-size: 30px;
+    text-align: center;
+}
+
+section {
+	text-align: center;
+}
+
+ul {
+	padding-top: 10px;
+	width: 400px;	
+	margin: 0 auto;
+	text-align: left;
+	list-style-type: none;	
+}
+
+li {
+	padding: 5px;
+}
+
+input[type="text"] {
+    outline: none;
+    width: 300px;    
+    border-radius: 10px;
+    text-indent: 10px;
+    padding: 5px;
+    border: 2px solid #FFA500;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+input[type="text"]:focus {
+	border: 2px solid #739747;		
+}
+
+button {
+	padding: 5px;
+	border-radius: 10px;
+	margin-left: 10px;
+	border: 2px solid #FFA500;
+	box-shadow: 1px -1px 1px #E59400;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bold;
+	outline: none;
+	background-color: #eee;
+	width: 80px;
+}
+
+button:hover {
+	background-color: #FFAE19;
+}
+
+span {
+    margin-left: 10px;
+    color: blue;
+    cursor: pointer;
+}
+
+span:hover {
+    color: red;
+}
