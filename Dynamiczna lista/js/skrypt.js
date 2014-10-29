@@ -71,5 +71,21 @@ window.onload=function(){
         }
         
     });
+    
+    
+    //usuwanie/dodanie klasy active do elementu li
+    var keepConnection = null; //uchwyt do elementu li, ktory poprzednio by active
+    document.getElementById("data-list").addEventListener("click", function(event){
+            
+//        if (event.target.tagName == "LI"){
+//  
+//        }
+        if (keepConnection !== null){
+            keepConnection.removeAttribute("class");
+        }
+        event.target.setAttribute("class", "active");
+        keepConnection = event.target;
+    });
+    
 
 };
