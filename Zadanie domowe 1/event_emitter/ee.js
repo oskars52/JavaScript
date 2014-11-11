@@ -7,40 +7,45 @@
 
     EE = function () {
         //store the listeners somewhere
-        this.listeners = [];
+        this.listeners = {}; //najlepiej jest jak listeners jest obiektem
     };
 
-    EE.prototype.on = function (eventName, listener, context) {
+    //funkcja on - bierze dany listener i zapisuje w środku kolekcji
+    EE.prototype.on = function (eventName, listener, context) {        
         if (!this.listeners[eventName]) {
             this.listeners[eventName] = {
-                tab: [],
-                con: null
+                tab: []                
             };
         }
-        this.listeners[eventName].tab.push(listener);
-        this.listeners[eventName].con = context;
 
-        return function () {            
-            for (var i = 0; i < this.listeners[eventName].tab.length; ++i) {
-                if (this.listeners[eventName].tab[i] === listener) {                    
-                    if (i !== -1) {
-                        this.listeners[eventName].tab.splice(i, 1);
-                    }
-                    break;
+        this.listeners[eventName].tab.push({
+            listener: listener,
+            con: context
+        });        
+
+        return function () {                
+            var lis = this.listeners[eventName].tab,
+                licznik = 0;
+            lis.forEach(function(entry) {
+                if (entry.listener === listener) {
+                    lis.splice(licznik, 1);
+                    // break;
                 }
-            }            
-        }.bind(this);
+                licznik++;
+            });                    
+        }.bind(this);        
     };
 
     EE.prototype.emit = function (eventName /*, other args...*/ ) {
-        var pom = this.listeners[eventName].tab;
+        var lis = this.listeners[eventName].tab;
         var argumenty = [];
         for (var i = 1; i < arguments.length; ++i) {
             argumenty.push(arguments[i]);
-        }
-        for (var i = 0; i < pom.length; ++i) {
-            pom[i].apply(this.listeners[eventName].con, argumenty);
-        }
+        }                
+        lis.forEach(function(entry) {
+            entry.listener.apply(entry.con, argumenty);
+        });
+
     };
 
     var ee = new EE();
