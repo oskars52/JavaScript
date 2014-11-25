@@ -12,6 +12,12 @@ body {
 
 ul li {
 	padding-top: 5px;
+	cursor: pointer;	
+}
+
+ul li.active {
+	color: #E54A00;
+	font-weight: bold;
 }
 
 input[type="text"] {

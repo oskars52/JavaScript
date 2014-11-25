@@ -3,19 +3,18 @@
 //
 UAM.InputView = function (item) {
 	UAM.EventEmitter.call(this);
-	this.textToAdd = "";
 	this.clickButton = null;
 	this.view = item;
 
     var _this = this;
-    this.textToAdd = document.getElementById("inputview");
-    this.clickButton = document.getElementById("addview");
+    this.textToAdd = this.view.querySelector("#inputview");    
+    this.clickButton = this.view.querySelector("#addview");
     
     this.clickButton.addEventListener("click" ,function(){
 
-        _this.emit("clickToButton", this.textToAdd.value);   
+        this.emit("clickToButton", this.textToAdd.value);   
         
-    }.bind(_this),false);
+    }.bind(this),false);
 
 };
 
@@ -27,17 +26,38 @@ UAM.utils.inherits(UAM.EventEmitter, UAM.InputView);
 //
 UAM.ListView = function (item) {
 	UAM.EventEmitter.call(this);
-	this.view = item;	
+	this.view = item;
+
 };
 
 UAM.utils.inherits(UAM.EventEmitter, UAM.ListView);
 
 UAM.ListView.prototype.addElementList = function(text){
 
-	var list = document.getElementById("listview");
     var li = document.createElement("li");
     li.innerHTML = text;
-    list.appendChild(li);
+    this.view.appendChild(li);
+    
+	this.addChangeActivity(li);
+}
+
+UAM.ListView.prototype.addChangeActivity = function(elem){
+	    
+    elem.addEventListener("click" ,function(){
+
+    	this.emit("sendChangeActivity", elem);// or elem.innerHTML    	
+        
+    }.bind(this),false);
+
+}
+
+UAM.ListView.prototype.updateElementList = function(elem){
+	    
+    if (elem.className === ""){
+    	elem.className = "active";
+    } else {
+    	elem.removeAttribute("class");
+    }
 
 }
 
@@ -52,9 +72,8 @@ UAM.FooterView = function (item) {
 
 UAM.utils.inherits(UAM.EventEmitter, UAM.FooterView);
 
-UAM.FooterView.prototype.updateFooter = function(length) {
+UAM.FooterView.prototype.updateFooter = function(length, activLength) {
 	
-	var textInFooter = document.getElementById("footerview");	
-	textInFooter.innerHTML = "Wszystkie/aktywne: " + length + "/0";	
+	this.view.innerHTML = "Wszystkie/aktywne: " + length + " / " + activLength;	
 
 }

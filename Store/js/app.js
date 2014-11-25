@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	var store = new UAM.Store();
 
-	var inputView = new UAM.InputView(document.querySelector('#inputview'));
+	var inputView = new UAM.InputView(document.querySelector('#inputviewall'));
 	var listView = new UAM.ListView(document.querySelector('#listview'));
 	var footerView = new UAM.FooterView(document.querySelector('#footerview'));
 

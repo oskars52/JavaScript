@@ -3,9 +3,9 @@
 //
 UAM.InputCtrl = function (inputView, store){
 
+    //action after click to button
     inputView.on("clickToButton",function(name){
-        store.add(name);
-        store.update();
+        store.add(name);        
     });
     
 }
@@ -16,9 +16,20 @@ UAM.InputCtrl = function (inputView, store){
 //
 UAM.ListCtrl = function (listView, store){
     
+    //action from Store to view that add element to list
     store.on("addElem",function(data){
         listView.addElementList(data);        
     });
+
+    //action from view that element li was pressed
+    listView.on("sendChangeActivity",function(text){        
+        store.update(text);        
+    });
+
+    //action from Store that update active element in view list
+    store.on("afterChangeActivity",function(elem){
+        listView.updateElementList(elem);
+    });    
     
 }
 
@@ -27,9 +38,10 @@ UAM.ListCtrl = function (listView, store){
 //FooterCtrl
 //
 UAM.FooterCtrl = function (footerView, store){
-       
-	store.on("updateLength",function(length){
-        footerView.updateFooter(length);        
+    
+    //action from Store that update footer view, this is length of two list
+	store.on("updateLength",function(length, activeLength){
+        footerView.updateFooter(length, activeLength);        
     });
 	
 }
