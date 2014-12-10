@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="myapp">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Web Applications - AngularJS</title>
+
+        <meta name="author" content="Oskar Ziegenhagen">
+
+        <link rel="stylesheet" href="styles.css">
+
+        <script src="lib/angular.js"></script>
+        <script src="js/todoctrl.js"></script>
+    </head>
+
+    <body>
+        <div class="list" ng-controller="TodoCtrl">
+            <input type="text" class="field" ng-model="inputText" />
+            <button class="submit" ng-click="add()">Add</button>
+            <ul>
+                <li ng-repeat="elem in container"
+                    ng-click="change(elem.id)"
+                    ng-class="{inactive: elem.activ === true }"
+                >{{elem.content}}</li>
+            </ul>
+        </div>
+    </body>
+</html>
